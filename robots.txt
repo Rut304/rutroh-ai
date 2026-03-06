@@ -1,0 +1,4 @@
+# RutRoh Inc. Robots.txt
+User-agent: *
+Allow: /
+Sitemap: https://rutroh.org/sitemap.xml
