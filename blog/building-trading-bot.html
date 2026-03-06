@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Your First Trading Bot: A Beginner's Guide — RutRoh Blog</title>
+    <meta name="description" content="Building Your First Trading Bot: A Beginner's Guide">
+    <link rel="canonical" href="https://rutroh.org/blog/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0f0f1a; --bg-card: #16213e; --text: #eaeaea; --text-muted: #8892b0; --accent: #e94560; --border: #233554; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        nav { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 1.5rem 2rem; }
+        .nav-brand { font-size: 1.2rem; font-weight: 700; color: var(--text); text-decoration: none; }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; }
+        nav a:hover { color: var(--text); }
+        article { max-width: 720px; margin: 0 auto; padding: 1rem 2rem 4rem; }
+        .article-header { margin-bottom: 2.5rem; }
+        .article-header h1 { font-size: 2.2rem; font-weight: 700; line-height: 1.3; margin-bottom: 1rem; background: linear-gradient(135deg, #fff 0%, #ccd6f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .article-meta { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+        .article-tag { background: rgba(233, 69, 96, 0.12); color: var(--accent); padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600; }
+        .article-date { color: var(--text-muted); font-size: 0.9rem; }
+        article h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; color: var(--text); }
+        article h3 { font-size: 1.25rem; margin: 2rem 0 0.75rem; color: var(--text); }
+        article p { color: var(--text-muted); margin-bottom: 1.25rem; font-size: 1.05rem; }
+        article ul, article ol { padding-left: 1.5rem; margin-bottom: 1.25rem; }
+        article li { color: var(--text-muted); margin-bottom: 0.5rem; font-size: 1.02rem; }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+        article strong { color: var(--text); }
+        article code { background: rgba(233, 69, 96, 0.1); color: var(--accent-soft, #ff6b6b); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+        article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; overflow-x: auto; margin-bottom: 1.5rem; }
+        article pre code { background: none; padding: 0; color: var(--text-muted); }
+        article blockquote { border-left: 3px solid var(--accent); padding: 0.5rem 1rem; margin: 1.5rem 0; background: rgba(233, 69, 96, 0.05); border-radius: 0 8px 8px 0; }
+        article blockquote p { margin: 0; font-style: italic; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--accent); text-decoration: none; font-weight: 600; margin-top: 2rem; }
+        .share-section { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .share-section h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--text); }
+        .share-links a { display: inline-block; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted); padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; margin-right: 0.5rem; font-size: 0.9rem; transition: all 0.2s; }
+        .share-links a:hover { border-color: var(--accent); color: var(--text); }
+        footer { max-width: 800px; margin: 0 auto; padding: 2rem; border-top: 1px solid var(--border); text-align: center; }
+        footer a { color: var(--text-muted); text-decoration: none; margin: 0 0.5rem; font-size: 0.9rem; }
+        @media (max-width: 768px) {
+            .article-header h1 { font-size: 1.6rem; }
+            article { padding: 1rem 1.25rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-brand">RutRoh Inc.</a>
+        <div>
+            <a href="/blog/">Blog</a>
+            &nbsp;&nbsp;
+            <a href="https://matchups-eta.vercel.app" target="_blank">Matchups</a>
+        </div>
+    </nav>
+    <article>
+        <div class="article-header">
+            <h1>Building Your First Trading Bot: A Beginner's Guide</h1>
+            <div class="article-meta">
+                <span class="article-tag">TUTORIALS</span>
+                <span class="article-date">February 28, 2026</span>
+                <span class="article-date">&middot; 5 min read</span>
+            </div>
+        </div>
+            <h2>Introduction</h2>
+            <p>Trading bots can seem intimidating, but with the right tools, anyone can build one. Here’s how we created a bot with a <strong>65% win rate</strong> on Kalshi.</p>
+            <h2>Step 1: Choose Your Platform</h2>
+            <p>Kalshi is ideal for prediction markets. Sign up and familiarize yourself with the API.</p>
+            <h2>Step 2: Data Collection</h2>
+            <p>Use AI to scrape and analyze historical market data. Tools like <a href="https://www.amazon.com/dp/B08N5KWB9H"><em>Python for Finance</em></a> (affiliate link) can help.</p>
+            <h2>Step 3: Strategy Development</h2>
+            <p>Start with simple strategies like mean reversion. Our bot uses a combination of technical indicators and sentiment analysis.</p>
+            <h2>Step 4: Backtesting</h2>
+            <p>Test your strategy against historical data. Adjust parameters to optimize performance.</p>
+            <h2>Step 5: Deployment</h2>
+            <p>Deploy your bot using cloud services like AWS or a local server. Monitor performance and tweak as needed.</p>
+            <h2>Conclusion</h2>
+            <p>Building a trading bot is easier than you think. Start small, iterate, and scale.</p>
+        <div class="share-section">
+            <h3>Share this article</h3>
+            <div class="share-links">
+                <a href="https://x.com/intent/tweet?text=Building%20Your%20First%20Trading%20Bot:%20A%20Beginner's%20Guide&url=https://rutroh.org/blog/" target="_blank">Share on X</a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://rutroh.org/blog/" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <a href="/blog/" class="back-link">&larr; Back to Blog</a>
+    </article>
+    <footer>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.5rem;">&copy; 2025&ndash;2026 RutRoh Inc.</p>
+        <a href="/">Home</a> &middot; <a href="/blog/">Blog</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
+    </footer>
+</body>
+</html>

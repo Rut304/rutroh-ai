@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — RutRoh Inc. | AI, Tech & Automation Insights</title>
+    <meta name="description" content="AI and technology insights from RutRoh Inc. Covering AI agents, automation, prediction markets, trading bots, and the future of tech.">
+    <link rel="canonical" href="https://rutroh.org/blog/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0f0f1a; --bg-card: #16213e; --bg-card-hover: #1a2744; --text: #eaeaea; --text-muted: #8892b0; --accent: #e94560; --accent-soft: #ff6b6b; --border: #233554; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; }
+
+        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem; }
+        .nav-brand { font-size: 1.3rem; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .nav-brand img { height: 32px; border-radius: 4px; }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--text); }
+
+        .hero { text-align: center; padding: 3rem 2rem 2rem; max-width: 700px; margin: 0 auto; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.75rem; background: linear-gradient(135deg, #fff 0%, #ccd6f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { color: var(--text-muted); font-size: 1.1rem; }
+
+        .categories { display: flex; justify-content: center; gap: 0.75rem; padding: 1.5rem 2rem; flex-wrap: wrap; max-width: 800px; margin: 0 auto; }
+        .cat-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted); padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.85rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+        .cat-btn:hover, .cat-btn.active { background: rgba(233, 69, 96, 0.15); color: var(--accent); border-color: rgba(233, 69, 96, 0.3); }
+
+        .posts { max-width: 900px; margin: 2rem auto; padding: 0 2rem; display: grid; gap: 1.25rem; }
+
+        .post-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem 2rem; transition: all 0.3s; display: block; text-decoration: none; color: var(--text); }
+        .post-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(233, 69, 96, 0.1); }
+        .post-meta { display: flex; gap: 1rem; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; }
+        .post-tag { background: rgba(233, 69, 96, 0.12); color: var(--accent); padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+        .post-date { color: var(--text-muted); font-size: 0.85rem; }
+        .post-card h2 { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.4; }
+        .post-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+        .post-read { color: var(--accent); font-size: 0.9rem; font-weight: 600; margin-top: 0.75rem; display: inline-block; }
+
+        .featured { border: 1px solid var(--accent); position: relative; }
+        .featured::before { content: "FEATURED"; position: absolute; top: -0.6rem; left: 1.5rem; background: var(--accent); color: #fff; padding: 0.15rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; }
+
+        .newsletter { max-width: 600px; margin: 3rem auto; padding: 2.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; text-align: center; }
+        .newsletter h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .newsletter p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem; }
+        .newsletter a { display: inline-block; background: linear-gradient(135deg, var(--accent) 0%, #c23152 100%); color: #fff; padding: 0.7rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; }
+
+        footer { max-width: 1100px; margin: 0 auto; padding: 2rem; border-top: 1px solid var(--border); text-align: center; }
+        footer a { color: var(--text-muted); text-decoration: none; margin: 0 0.5rem; font-size: 0.9rem; }
+        footer p { color: var(--text-muted); font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .post-card { padding: 1.25rem; }
+            nav { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-brand">
+            <img src="../assets/rutroh_logo.png" alt="RutRoh">
+            <span>RutRoh</span>
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/blog/" style="color: var(--accent);">Blog</a>
+            <a href="https://matchups-eta.vercel.app" target="_blank">Matchups</a>
+            <a href="mailto:rutrohd@gmail.com">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>AI & Tech Insights</h1>
+        <p>Deep dives into AI agents, automation, prediction markets, trading bots, and the technology shaping our future.</p>
+    </section>
+
+    <div class="categories">
+        <a href="#" class="cat-btn active">All Posts</a>
+        <a href="#" class="cat-btn">AI Agents</a>
+        <a href="#" class="cat-btn">Automation</a>
+        <a href="#" class="cat-btn">Trading & Markets</a>
+        <a href="#" class="cat-btn">Tech Reviews</a>
+        <a href="#" class="cat-btn">Tutorials</a>
+    </div>
+
+    <div class="posts">
+
+        <!-- FEATURED: AI Agents Making Money -->
+        <a href="ai-agents-making-money.html" class="post-card featured">
+            <div class="post-meta">
+                <span class="post-tag">AI AGENTS</span>
+                <span class="post-date">March 1, 2026</span>
+                <span class="post-date">&middot; 7 min read</span>
+            </div>
+            <h2>How AI Agents Made $358 While I Slept (And You Can Too)</h2>
+            <p>A real-world breakdown of running autonomous AI agents for passive income. From prediction market trading to content automation, here's how our multi-agent system generates revenue 24/7.</p>
+            <span class="post-read">Read Article &rarr;</span>
+        </a>
+
+        <!-- AI Team Orchestration -->
+        <a href="ai-team-orchestration.html" class="post-card">
+            <div class="post-meta">
+                <span class="post-tag">AI AGENTS</span>
+                <span class="post-date">March 2, 2026</span>
+                <span class="post-date">&middot; 8 min read</span>
+            </div>
+            <h2>From Solo AI to Team Symphony: How Orchestrated Agents Are Revolutionizing Workflow Automation</h2>
+            <p>Move beyond single AI chatbots. Learn how multi-agent orchestration with specialized roles — CEO, CTO, analysts — creates AI teams that outperform any solo model.</p>
+            <span class="post-read">Read Article &rarr;</span>
+        </a>
+
+        <!-- Fed Prediction -->
+        <a href="fed-march-2026-prediction.html" class="post-card">
+            <div class="post-meta">
+                <span class="post-tag">TRADING & MARKETS</span>
+                <span class="post-date">March 3, 2026</span>
+                <span class="post-date">&middot; 4 min read</span>
+            </div>
+            <h2>Fed March 2026 Meeting: Why Markets Expect No Rate Cuts (95% Probability)</h2>
+            <p>Breaking down the current economic indicators pointing to the Fed holding rates steady. What prediction markets, CME FedWatch, and macro data tell us.</p>
+            <span class="post-read">Read Article &rarr;</span>
+        </a>
+
+        <!-- AI Prediction Markets -->
+        <a href="ai-prediction-markets.html" class="post-card">
+            <div class="post-meta">
+                <span class="post-tag">TRADING & MARKETS</span>
+                <span class="post-date">March 2, 2026</span>
+                <span class="post-date">&middot; 5 min read</span>
+            </div>
+            <h2>How AI Agents Can Trade Prediction Markets for Passive Income</h2>
+            <p>A comprehensive guide to using AI agents for automated prediction market trading on platforms like Kalshi and Polymarket. Strategy, setup, and real results.</p>
+            <span class="post-read">Read Article &rarr;</span>
+        </a>
+
+        <!-- Building Trading Bot -->
+        <a href="building-trading-bot.html" class="post-card">
+            <div class="post-meta">
+                <span class="post-tag">TUTORIALS</span>
+                <span class="post-date">February 28, 2026</span>
+                <span class="post-date">&middot; 5 min read</span>
+            </div>
+            <h2>Building Your First Trading Bot: A Beginner's Guide</h2>
+            <p>Step-by-step guide to building an automated trading bot using Python. Covers API integration, strategy implementation, risk management, and deployment.</p>
+            <span class="post-read">Read Article &rarr;</span>
+        </a>
+
+        <!-- AI Orchestration -->
+        <a href="ai-orchestration-2026.html" class="post-card">
+            <div class="post-meta">
+                <span class="post-tag">AUTOMATION</span>
+                <span class="post-date">March 2, 2026</span>
+                <span class="post-date">&middot; 5 min read</span>
+            </div>
+            <h2>Beyond Content Creation: How to Build an AI-Powered Content Orchestration System</h2>
+            <p>The shift from isolated AI tools to integrated AI systems. Learn how agentic AI and hyper-personalized content ecosystems are redefining scalability in 2026.</p>
+            <span class="post-read">Read Article &rarr;</span>
+        </a>
+
+        <!-- 5 AI Money Tools -->
+        <a href="5-ai-money-tools.html" class="post-card">
+            <div class="post-meta">
+                <span class="post-tag">AI AGENTS</span>
+                <span class="post-date">February 27, 2026</span>
+                <span class="post-date">&middot; 5 min read</span>
+            </div>
+            <h2>5 AI Tools That Actually Make Money in 2026 (And How to Use Them)</h2>
+            <p>Cut through the hype. These are the 5 AI tools generating real revenue for small businesses and solo operators right now — with setup guides for each.</p>
+            <span class="post-read">Read Article &rarr;</span>
+        </a>
+
+        <!-- Smart Home Best -->
+        <a href="../best-smart-home-2026.html" class="post-card">
+            <div class="post-meta">
+                <span class="post-tag">TECH REVIEWS</span>
+                <span class="post-date">February 25, 2026</span>
+                <span class="post-date">&middot; 6 min read</span>
+            </div>
+            <h2>The Best Smart Home Gadgets of 2026 (That Actually Work)</h2>
+            <p>We tested dozens of smart home devices so you don't have to. Here are our top picks for 2026 — from security cameras to voice assistants to energy monitors.</p>
+            <span class="post-read">Read Article &rarr;</span>
+        </a>
+
+        <!-- AI Content Strategies -->
+        <a href="ai-content-strategies.html" class="post-card">
+            <div class="post-meta">
+                <span class="post-tag">AUTOMATION</span>
+                <span class="post-date">March 2, 2026</span>
+                <span class="post-date">&middot; 6 min read</span>
+            </div>
+            <h2>AI-Powered Content Strategies: A Comprehensive Guide</h2>
+            <p>From automated blog generation to multi-platform distribution — the complete playbook for building a content engine powered by AI agents.</p>
+            <span class="post-read">Read Article &rarr;</span>
+        </a>
+
+        <!-- 10K Blueprint -->
+        <a href="10k-ai-business-blueprint.html" class="post-card">
+            <div class="post-meta">
+                <span class="post-tag">AI AGENTS</span>
+                <span class="post-date">March 1, 2026</span>
+                <span class="post-date">&middot; 6 min read</span>
+            </div>
+            <h2>The $10K/Month AI Business Blueprint</h2>
+            <p>A practical framework for building a $10K/month business using AI agents, content automation, and prediction market trading. Real strategies, real numbers.</p>
+            <span class="post-read">Read Article &rarr;</span>
+        </a>
+
+    </div>
+
+    <!-- Newsletter / Substack CTA -->
+    <section class="newsletter">
+        <h3>Get Weekly AI & Tech Insights</h3>
+        <p>Join our Substack for deep dives into AI agents, automation strategies, and the tech tools that are actually making money in 2026.</p>
+        <a href="https://rutroh.substack.com" target="_blank">Subscribe on Substack &rarr;</a>
+    </section>
+
+    <footer>
+        <p style="margin-bottom: 0.5rem;">&copy; 2025&ndash;2026 RutRoh Inc.</p>
+        <a href="/">Home</a> &middot;
+        <a href="/blog/">Blog</a> &middot;
+        <a href="/terms.html">Terms</a> &middot;
+        <a href="/privacy.html">Privacy</a> &middot;
+        <a href="https://x.com/rohrut_ai" target="_blank">X</a> &middot;
+        <a href="https://www.tiktok.com/@rutroh_ai" target="_blank">TikTok</a>
+    </footer>
+</body>
+</html>
