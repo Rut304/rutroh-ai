@@ -1,0 +1,48 @@
+name: Auto-Post Updates
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Daily at 12:00 UTC (8am ET)
+  workflow_dispatch:  # Allow manual triggers
+
+jobs:
+  update-and-post:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          
+      - name: Run update script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/update_content.py
+          
+      - name: Create blog post issue
+        uses: peter-evans/create-issue@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Daily Update - $(date +'%Y-%m-%d')"
+          body: |
+            Auto-generated blog post content from today's updates.
+            
+            - New products added
+            - Content updates
+            - SEO optimizations
+          labels: "blog, automated"
+          
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs

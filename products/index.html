@@ -15,6 +15,19 @@
             padding: 100px 24px 48px;
             max-width: 680px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        .products-hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(129,140,248,0.06) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .products-hero h1 {
@@ -23,6 +36,12 @@
             letter-spacing: -0.03em;
             line-height: 1.1;
             margin-bottom: 16px;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
         }
 
         .products-hero .subtitle {
@@ -30,6 +49,8 @@
             font-size: 1.1rem;
             line-height: 1.6;
             margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
         }
 
         .product-grid {
@@ -42,7 +63,7 @@
         }
 
         .product-card {
-            background: var(--surface);
+            background: var(--gradient-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             overflow: hidden;
@@ -50,6 +71,19 @@
             text-decoration: none;
             display: block;
             color: var(--text);
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient-accent-bar);
+            opacity: 0;
+            transition: opacity var(--duration-slow);
         }
 
         .product-card:hover {
@@ -60,11 +94,30 @@
             color: var(--text);
         }
 
-        .product-card img {
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card .card-image {
             width: 100%;
             height: 200px;
-            object-fit: cover;
             background: var(--surface-raised);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-card .card-image img {
+            max-width: 90%;
+            max-height: 170px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+            transition: transform var(--duration-slow) var(--ease-out);
+        }
+
+        .product-card:hover .card-image img {
+            transform: scale(1.05);
         }
 
         .product-card .card-body {
@@ -101,6 +154,7 @@
         .product-card .count {
             color: var(--text-muted);
             font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
         }
     </style>
 </head>
@@ -126,7 +180,11 @@
 
     <div class="product-grid">
         <a href="best-smart-home-2026.html" class="product-card">
-            <img src="https://m.media-amazon.com/images/I/61YQjKgFOBL._AC_SL1500_.jpg" alt="Smart Home Gadgets">
+            <div class="card-image">
+                <img src="https://m.media-amazon.com/images/I/61YQjKgFOBL._AC_SL1500_.jpg" alt="Smart Home Gadgets"
+                    loading="lazy"
+                    onerror="this.style.display='none'">
+            </div>
             <div class="card-body">
                 <span class="tag">Smart Home</span>
                 <h3>Best Smart Home Gadgets 2026</h3>
@@ -136,6 +194,15 @@
             </div>
         </a>
     </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2025&ndash;2026 RutRoh Inc. &middot;
+            <a href="/">Home</a> &middot;
+            <a href="/products/">Products</a> &middot;
+            <a href="/blog/">Blog</a> &middot;
+            <a href="https://x.com/rohrut_ai" target="_blank" rel="noopener">X</a>
+        </p>
+    </footer>
 </body>
 
 </html>

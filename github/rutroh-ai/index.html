@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RutRoh Inc. — AI-Powered Digital Products & Analytics</title>
-    <meta name="description"
-        content="RutRoh Inc. builds AI-powered digital products including sports analytics, curated product recommendations, and content automation tools.">
+    <meta name="description" content="RutRoh Inc. builds AI-powered digital products including sports analytics, curated product recommendations, and content automation tools.">
     <meta name="keywords" content="RutRoh, AI, sports analytics, matchups, product recommendations, automation">
     <meta property="og:title" content="RutRoh Inc. — AI-Powered Digital Products & Analytics">
     <meta property="og:description" content="Building the future of sports analytics and AI-powered product discovery.">
@@ -17,13 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --primary: #1a1a2e;
@@ -56,34 +48,12 @@
             margin: 0 auto;
             padding: 1.5rem 2rem;
         }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-
-        .nav-logo img {
-            height: 40px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text);
-        }
+        .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .nav-logo img { height: 40px; border-radius: 6px; }
+        .nav-logo span { font-size: 1.4rem; font-weight: 700; color: var(--text); letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
 
         /* ---- HERO ---- */
         .hero {
@@ -92,7 +62,6 @@
             max-width: 900px;
             margin: 0 auto;
         }
-
         .hero-badge {
             display: inline-block;
             background: rgba(233, 69, 96, 0.15);
@@ -104,7 +73,6 @@
             margin-bottom: 1.5rem;
             border: 1px solid rgba(233, 69, 96, 0.3);
         }
-
         .hero h1 {
             font-size: 3.2rem;
             font-weight: 700;
@@ -115,21 +83,13 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .hero p {
             font-size: 1.2rem;
             color: var(--text-muted);
             max-width: 650px;
             margin: 0 auto 2.5rem;
         }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
+        .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
         .btn {
             display: inline-flex;
             align-items: center;
@@ -141,58 +101,30 @@
             text-decoration: none;
             transition: all 0.25s ease;
         }
-
         .btn-primary {
             background: linear-gradient(135deg, var(--accent) 0%, #c23152 100%);
             color: #fff;
             box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
         }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
-        }
-
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4); }
         .btn-secondary {
             background: var(--bg-card);
             color: var(--text);
             border: 1px solid var(--border);
         }
-
-        .btn-secondary:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--text-muted);
-        }
+        .btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--text-muted); }
 
         /* ---- PRODUCTS GRID ---- */
-        .section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-header h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-        }
+        .section { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .section-header p { color: var(--text-muted); font-size: 1.05rem; }
 
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 1.5rem;
         }
-
         .product-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -202,30 +134,10 @@
             position: relative;
             overflow: hidden;
         }
-
-        .product-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
-            box-shadow: 0 8px 30px rgba(233, 69, 96, 0.15);
-        }
-
-        .product-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .product-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
-        .product-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1.25rem;
-        }
-
+        .product-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 8px 30px rgba(233, 69, 96, 0.15); }
+        .product-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .product-card h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.75rem; }
+        .product-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem; }
         .product-card .card-link {
             display: inline-flex;
             align-items: center;
@@ -235,11 +147,7 @@
             font-weight: 600;
             font-size: 0.95rem;
         }
-
-        .product-card .card-link:hover {
-            color: var(--accent-soft);
-        }
-
+        .product-card .card-link:hover { color: var(--accent-soft); }
         .product-card .tag {
             position: absolute;
             top: 1rem;
@@ -260,22 +168,9 @@
             padding: 3rem 2rem;
             flex-wrap: wrap;
         }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat .number {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .stat .label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-        }
+        .stat { text-align: center; }
+        .stat .number { font-size: 2.2rem; font-weight: 700; color: var(--accent); }
+        .stat .label { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
 
         /* ---- ABOUT ---- */
         .about-section {
@@ -284,18 +179,8 @@
             padding: 4rem 2rem;
             text-align: center;
         }
-
-        .about-section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .about-section p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
+        .about-section h2 { font-size: 1.8rem; margin-bottom: 1.25rem; }
+        .about-section p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem; }
 
         /* ---- SOCIAL SIDEBAR ---- */
         .social-sidebar {
@@ -308,7 +193,6 @@
             gap: 0.75rem;
             z-index: 100;
         }
-
         .social-sidebar a {
             display: flex;
             align-items: center;
@@ -323,12 +207,7 @@
             font-size: 1.1rem;
             transition: all 0.2s;
         }
-
-        .social-sidebar a:hover {
-            background: var(--bg-card-hover);
-            color: var(--text);
-            border-color: var(--accent);
-        }
+        .social-sidebar a:hover { background: var(--bg-card-hover); color: var(--text); border-color: var(--accent); }
 
         /* ---- FOOTER ---- */
         footer {
@@ -337,43 +216,16 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 2rem;
             margin-bottom: 2rem;
         }
-
-        .footer-brand p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            line-height: 1.6;
-        }
-
-        .footer-col h4 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.75rem;
-            color: var(--text);
-        }
-
-        .footer-col a {
-            display: block;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 0.25rem 0;
-            transition: color 0.2s;
-        }
-
-        .footer-col a:hover {
-            color: var(--text);
-        }
-
+        .footer-brand p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; line-height: 1.6; }
+        .footer-col h4 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem; color: var(--text); }
+        .footer-col a { display: block; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; padding: 0.25rem 0; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--text); }
         .footer-bottom {
             display: flex;
             justify-content: space-between;
@@ -385,95 +237,48 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-
-        .footer-bottom a {
-            color: var(--text-muted);
-            text-decoration: none;
-        }
-
-        .footer-bottom a:hover {
-            color: var(--text);
-        }
+        .footer-bottom a { color: var(--text-muted); text-decoration: none; }
+        .footer-bottom a:hover { color: var(--text); }
 
         /* ---- RESPONSIVE ---- */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero {
-                padding: 3rem 1.5rem 2rem;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .stats-bar {
-                gap: 2rem;
-            }
-
-            .social-sidebar {
-                display: none;
-            }
-
-            nav {
-                padding: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
+            .hero h1 { font-size: 2.2rem; }
+            .hero { padding: 3rem 1.5rem 2rem; }
+            .products-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .stats-bar { gap: 2rem; }
+            .social-sidebar { display: none; }
+            nav { padding: 1rem; }
+            .nav-links { gap: 1rem; }
         }
-
         @media (max-width: 480px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
-
 <body>
 
     <!-- Social Sidebar -->
     <div class="social-sidebar">
         <a href="https://x.com/rohrut_ai" target="_blank" rel="noopener" title="Follow us on X">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
         <a href="https://www.tiktok.com/@rutroh_ai" target="_blank" rel="noopener" title="Follow us on TikTok">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.88 2.89 2.89 0 0 1 2.88-2.88c.28 0 .54.04.8.1V9.03a6.3 6.3 0 0 0-.8-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.73a8.14 8.14 0 0 0 3.77.92V6.3a4.85 4.85 0 0 1-.01.39z" />
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.88 2.89 2.89 0 0 1 2.88-2.88c.28 0 .54.04.8.1V9.03a6.3 6.3 0 0 0-.8-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.73a8.14 8.14 0 0 0 3.77.92V6.3a4.85 4.85 0 0 1-.01.39z"/></svg>
         </a>
         <a href="https://github.com/Rut304" target="_blank" rel="noopener" title="GitHub">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
         </a>
     </div>
 
     <!-- Nav -->
     <nav>
         <a href="/" class="nav-logo">
-            <img src="assets/rutroh_logo.png" alt="RutRoh">
+            <img src="assets/rutroh_logo.png" alt="RutRoh Logo">
+            <span>RutRoh</span>
         </a>
         <div class="nav-links">
-            <a href="/phoebe/">Phoebe</a>
-            <a href="/blog/">Blog</a>
             <a href="#products">Products</a>
             <a href="#about">About</a>
             <a href="https://matchups-eta.vercel.app" target="_blank">Matchups</a>
@@ -485,8 +290,7 @@
     <section class="hero">
         <div class="hero-badge">AI-Powered Digital Products</div>
         <h1>Smarter Analytics. Better Recommendations.</h1>
-        <p>RutRoh Inc. builds AI-driven platforms for sports analytics, curated product discovery, and intelligent
-            automation tools.</p>
+        <p>RutRoh Inc. builds AI-driven platforms for sports analytics, curated product discovery, and intelligent automation tools.</p>
         <div class="hero-cta">
             <a href="https://matchups-eta.vercel.app" class="btn btn-primary" target="_blank">
                 Explore Matchups &rarr;
@@ -530,8 +334,7 @@
                 <span class="tag">LIVE</span>
                 <div class="icon">&#9917;</div>
                 <h3>Matchups &mdash; Sports Analytics</h3>
-                <p>Real-time sports analytics platform with AI-powered predictions, expert pick tracking, line movement
-                    analysis, and comprehensive game intelligence across NFL, NBA, MLB, and NHL.</p>
+                <p>Real-time sports analytics platform with AI-powered predictions, expert pick tracking, line movement analysis, and comprehensive game intelligence across NFL, NBA, MLB, and NHL.</p>
                 <a href="https://matchups-eta.vercel.app" target="_blank" class="card-link">
                     Launch Matchups &rarr;
                 </a>
@@ -542,9 +345,8 @@
                 <span class="tag">CURATED</span>
                 <div class="icon">&#128722;</div>
                 <h3>AI Product Recommendations</h3>
-                <p>AI-curated deals and product reviews across tech gadgets, smart home, kitchen appliances, and more.
-                    Updated daily with the best picks powered by data analysis.</p>
-                <a href="/products/" class="card-link">
+                <p>AI-curated deals and product reviews across tech gadgets, smart home, kitchen appliances, and more. Updated daily with the best picks powered by data analysis.</p>
+                <a href="best-smart-home-2026.html" class="card-link">
                     Browse Picks &rarr;
                 </a>
             </div>
@@ -553,8 +355,7 @@
             <div class="product-card">
                 <div class="icon">&#129302;</div>
                 <h3>AI Content Automation</h3>
-                <p>Automated content generation pipeline using AI agents to create video reviews, blog posts, and social
-                    media content for product discovery channels.</p>
+                <p>Automated content generation pipeline using AI agents to create video reviews, blog posts, and social media content for product discovery channels.</p>
                 <a href="#about" class="card-link">
                     Learn More &rarr;
                 </a>
@@ -566,14 +367,10 @@
     <!-- About -->
     <section class="about-section" id="about">
         <h2>About RutRoh Inc.</h2>
-        <p>RutRoh Inc. is a technology company focused on building AI-powered digital products. We combine machine
-            learning, real-time data pipelines, and automation to create tools that help people make smarter decisions
-            &mdash; whether that's analyzing a sports matchup or finding the best deal on a product.</p>
-        <p>Founded in 2025, we operate platforms serving users across the United States with a focus on data accuracy,
-            transparency, and continuous improvement.</p>
+        <p>RutRoh Inc. is a technology company focused on building AI-powered digital products. We combine machine learning, real-time data pipelines, and automation to create tools that help people make smarter decisions &mdash; whether that's analyzing a sports matchup or finding the best deal on a product.</p>
+        <p>Founded in 2025, we operate platforms serving users across the United States with a focus on data accuracy, transparency, and continuous improvement.</p>
         <p style="margin-top: 1.5rem;">
-            <strong>Contact:</strong> <a href="mailto:rutrohd@gmail.com"
-                style="color: var(--accent); text-decoration: none;">rutrohd@gmail.com</a>
+            <strong>Contact:</strong> <a href="mailto:rutrohd@gmail.com" style="color: var(--accent); text-decoration: none;">rutrohd@gmail.com</a>
         </p>
     </section>
 
@@ -582,13 +379,12 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <strong style="font-size: 1.1rem;">RutRoh Inc.</strong>
-                <p>Building AI-powered digital products for sports analytics, product discovery, and content automation.
-                </p>
+                <p>Building AI-powered digital products for sports analytics, product discovery, and content automation.</p>
             </div>
             <div class="footer-col">
                 <h4>Products</h4>
                 <a href="https://matchups-eta.vercel.app" target="_blank">Matchups</a>
-                <a href="/products/">Product Reviews</a>
+                <a href="best-smart-home-2026.html">Product Reviews</a>
                 <a href="blog/ai-prediction-markets.html">Blog</a>
             </div>
             <div class="footer-col">
@@ -617,5 +413,4 @@
     </footer>
 
 </body>
-
 </html>
