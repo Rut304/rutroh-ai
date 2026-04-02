@@ -190,7 +190,7 @@
     </div>
 
     <div class="footer" id="footer">
-        Data by <a href="https://finnhub.io" target="_blank" rel="noopener">Finnhub</a> &middot; Charts by <a href="https://tradingview.com" target="_blank" rel="noopener">TradingView</a> &middot; &copy; 2026 RutRoh
+        Data by <a href="https://www.alphavantage.co" target="_blank" rel="noopener">Alpha Vantage</a> &amp; <a href="https://finnhub.io" target="_blank" rel="noopener">Finnhub</a> &middot; Charts by <a href="https://tradingview.com" target="_blank" rel="noopener">TradingView</a> &middot; &copy; 2026 RutRoh
     </div>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
@@ -201,6 +201,8 @@
         // ===== CONFIG =====
         const FK = ['d4pqlp','1r01qj','pnb110','tgd4pq','lp1r01','qjpnb1','10u0'];
         const getFK = () => FK.join('');
+        const AV = ['6I17YO','J7QSQW','7N62'];
+        const getAV = () => AV.join('');
 
         const CRYPTO = {
             'BTC':{tv:'BINANCE:BTCUSDT',fh:'BINANCE:BTCUSDT',name:'Bitcoin'},
@@ -294,11 +296,29 @@
             // Fetch data and compute analysis
             try{
                 const data=await fetchData(ticker);
-                if(data && data.s!=='no_data' && data.c && data.c.length>5){
-                    const analysis=computeAnalysis(data,ticker);
-                    renderAnalysis(analysis);
+                if(data && data.s==='ok' && data.c && data.c.length>=2){
+                    if(data.quoteOnly){
+                        // Only have real-time quote, show basic info
+                        renderQuoteOnly(data.quote,ticker);
+                    }else{
+                        const analysis=computeAnalysis(data,ticker);
+                        renderAnalysis(analysis);
+                    }
                 } else {
-                    renderNoData(ticker);
+                    // Try resolving the name via Finnhub search
+                    const results=await searchSymbol(ticker);
+                    if(results.length>0){
+                        const resolved=results[0].symbol;
+                        const retryData=await fetchData(resolved);
+                        if(retryData && retryData.s==='ok' && retryData.c && retryData.c.length>=2 && !retryData.quoteOnly){
+                            const analysis=computeAnalysis(retryData,resolved);
+                            renderAnalysis(analysis);
+                        }else{
+                            renderNoData(ticker);
+                        }
+                    }else{
+                        renderNoData(ticker);
+                    }
                 }
             }catch(err){
                 console.error('Analysis error:',err);
@@ -347,22 +367,77 @@
             }
         }
 
-        // ===== DATA FETCH =====
+        // ===== DATA FETCH (Alpha Vantage + Finnhub quote) =====
         async function fetchData(ticker){
-            const now=Math.floor(Date.now()/1000);
-            const from=now-(45*86400); // 45 days for enough data for indicators
             const isCrypto=!!CRYPTO[ticker];
 
-            let url;
-            if(isCrypto){
-                url=`https://finnhub.io/api/v1/crypto/candle?symbol=${CRYPTO[ticker].fh}&resolution=D&from=${from}&to=${now}&token=${getFK()}`;
-            }else{
-                url=`https://finnhub.io/api/v1/stock/candle?symbol=${ticker}&resolution=D&from=${from}&to=${now}&token=${getFK()}`;
-            }
+            try{
+                let url;
+                if(isCrypto){
+                    url=`https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${ticker}&market=USD&apikey=${getAV()}`;
+                }else{
+                    url=`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&outputsize=compact&apikey=${getAV()}`;
+                }
 
-            const resp=await fetch(url);
-            if(!resp.ok)throw new Error(`HTTP ${resp.status}`);
-            return resp.json();
+                const resp=await fetch(url);
+                if(!resp.ok)throw new Error(`HTTP ${resp.status}`);
+                const raw=await resp.json();
+
+                // Check for AV error/rate limit
+                if(raw['Error Message']||raw['Note']||raw['Information']){
+                    console.warn('Alpha Vantage limit/error:',raw);
+                    // Fallback to Finnhub quote for basic info
+                    return await fetchFinnhubQuote(ticker);
+                }
+
+                // Parse Alpha Vantage response into standard {c,h,l,v,t,s} format
+                const tsKey=isCrypto?'Time Series (Digital Currency Daily)':'Time Series (Daily)';
+                const timeSeries=raw[tsKey];
+                if(!timeSeries)return null;
+
+                const dates=Object.keys(timeSeries).sort(); // oldest first
+                const recent=dates.slice(-45); // last 45 trading days
+
+                const c=[],h=[],l=[],v=[],t=[];
+                for(const date of recent){
+                    const bar=timeSeries[date];
+                    c.push(parseFloat(bar['4. close']));
+                    h.push(parseFloat(bar['2. high']));
+                    l.push(parseFloat(bar['3. low']));
+                    v.push(parseFloat(bar['5. volume']));
+                    t.push(Math.floor(new Date(date+'T16:00:00').getTime()/1000));
+                }
+
+                return{c,h,l,v,t,s:'ok'};
+            }catch(err){
+                console.error('Alpha Vantage fetch failed, trying Finnhub quote:',err);
+                return await fetchFinnhubQuote(ticker);
+            }
+        }
+
+        // Fallback: Finnhub real-time quote (always works on free tier)
+        async function fetchFinnhubQuote(ticker){
+            try{
+                const resp=await fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${getFK()}`);
+                const q=await resp.json();
+                if(!q.c||q.c===0)return null;
+
+                // Build minimal data from quote for basic analysis
+                return{
+                    c:[q.pc,q.c], h:[q.h,q.h], l:[q.l,q.l],
+                    v:[0,0], t:[0,Math.floor(Date.now()/1000)],
+                    s:'ok', quoteOnly:true, quote:q
+                };
+            }catch(e){return null}
+        }
+
+        // Finnhub symbol search for autocomplete
+        async function searchSymbol(query){
+            try{
+                const resp=await fetch(`https://finnhub.io/api/v1/search?q=${encodeURIComponent(query)}&token=${getFK()}`);
+                const data=await resp.json();
+                return data.result||[];
+            }catch(e){return[]}
         }
 
         // ===== TECHNICAL ANALYSIS =====
@@ -763,6 +838,28 @@
                     </div>`:''}
                 </div>
             `;
+        }
+
+        function renderQuoteOnly(q,ticker){
+            const upDown=q.d>=0;
+            const cls=upDown?'up':'down';
+            const arrow=upDown?'&#9650;':'&#9660;';
+            const name=CRYPTO[ticker]?CRYPTO[ticker].name:ticker;
+            analysisPanel.innerHTML=`
+                <div class="card">
+                    <div class="card-label"><span class="dot" style="background:var(--accent)"></span> ${name}</div>
+                    <div class="price-main">$${fmt(q.c)}</div>
+                    <div class="price-change ${cls}">${arrow} $${fmt(Math.abs(q.d))} (${q.dp>=0?'+':''}${q.dp.toFixed(2)}%)</div>
+                    <div class="price-meta" style="margin-top:10px">
+                        <span>Open: $${fmt(q.o)}</span>
+                        <span>High: $${fmt(q.h)}</span>
+                        <span>Low: $${fmt(q.l)}</span>
+                    </div>
+                </div>
+                <div class="card ai-card">
+                    <div class="card-label"><span class="dot" style="background:var(--accent)"></span> Note</div>
+                    <div class="ai-text">Full technical analysis requires historical data. Showing real-time quote from Finnhub. Use the TradingView chart above for full analysis with indicators and drawing tools.</div>
+                </div>`;
         }
 
         function renderNoData(ticker){
